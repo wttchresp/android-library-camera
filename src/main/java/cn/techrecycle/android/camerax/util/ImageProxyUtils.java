@@ -1,9 +1,17 @@
 package cn.techrecycle.android.camerax.util;
 
+import static androidx.camera.core.internal.utils.ImageUtil.imageToJpegByteArray;
+
+import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.camera.core.ImageProxy;
 import androidx.camera.core.ImageProxy.PlaneProxy;
+import androidx.camera.core.internal.utils.ImageUtil.CodecFailedException;
 import java.nio.ByteBuffer;
+import timber.log.Timber;
 
 /**
  * ImageProxy 相关的工具类
@@ -12,6 +20,27 @@ import java.nio.ByteBuffer;
  */
 public class ImageProxyUtils {
 
+  /**
+   * 将 ImageProxy 转换为 Bitmap
+   */
+  @Nullable
+  public static Bitmap toBitmap(@NonNull ImageProxy image) {
+    try {
+      @SuppressLint("RestrictedApi")
+      byte[] bytes = imageToJpegByteArray(image);
+      if (bytes == null) {
+        return null;
+      }
+      return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+    } catch (CodecFailedException e) {
+      Timber.d("ImageProxyUtils.toBitmap error: %s", e.getLocalizedMessage());
+      return null;
+    }
+  }
+
+  /**
+   * 将 ImageProxy 转换为 nv21 字节数据
+   */
   public static byte[] yuv_420_888toNv21(@NonNull ImageProxy image) {
     PlaneProxy yPlane = image.getPlanes()[0];
     PlaneProxy uPlane = image.getPlanes()[1];

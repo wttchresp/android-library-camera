@@ -49,6 +49,9 @@ public class CameraHelper {
   }
 
 
+  /**
+   * 启动相机,绑定相机到指定的 context 的生命周期中.
+   */
   public void start() {
     ListenableFuture<ProcessCameraProvider> cameraProviderListenableFuture = ProcessCameraProvider
         .getInstance(context);
@@ -94,7 +97,7 @@ public class CameraHelper {
     // 视频帧分析高度
     private int height;
 
-    
+
     public Builder(Context context) {
       this.context = context;
     }
