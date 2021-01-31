@@ -32,6 +32,7 @@ public class CameraHelper {
   private final int width;
   // 视频分析帧高度
   private final int height;
+  private ProcessCameraProvider cameraProvider;
 
   private CameraHelper(Builder builder) {
     this.context = builder.context;
@@ -57,7 +58,7 @@ public class CameraHelper {
         .getInstance(context);
     cameraProviderListenableFuture.addListener(() -> {
       try {
-        ProcessCameraProvider cameraProvider = cameraProviderListenableFuture.get();
+        cameraProvider = cameraProviderListenableFuture.get();
         Preview preview = new Preview.Builder()
             .build();
         preview.setSurfaceProvider(surfaceProvider);
@@ -82,6 +83,12 @@ public class CameraHelper {
     }, ContextCompat.getMainExecutor(context));
   }
 
+  public void stop() {
+    if (cameraProvider != null) {
+      cameraProvider.unbindAll();
+    }
+  }
+
   public static class Builder {
 
     private final Context context;
@@ -90,7 +97,7 @@ public class CameraHelper {
     // 预览
     private SurfaceProvider surfaceProvider;
     // 相机监听器
-    private CameraListener cameraListener = new CameraListener() {
+    private CameraListener cameraListener = new AbstractCameraListener() {
     };
     // 视频帧分析宽度
     private int width;

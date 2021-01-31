@@ -5,15 +5,9 @@ import androidx.camera.core.ImageProxy;
 
 public interface CameraListener {
 
-  default void onCameraOpened(Camera camera) {
-  }
+  void onCameraOpened(Camera camera);
 
-  default void onPreview(ImageProxy image, Camera camera) {
-  }
-
-  default void onCameraClosed() {
-  }
-
-  default void onCameraError(Exception e) {
-  }
+  void onPreview(ImageProxy image, Camera camera);
+  
+  void onCameraError(Exception e);
 }
