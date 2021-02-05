@@ -1,4 +1,4 @@
-package cn.techrecycle.android.camerax.util;
+package com.wttch.android.camerax.util;
 
 import static androidx.camera.core.internal.utils.ImageUtil.imageToJpegByteArray;
 

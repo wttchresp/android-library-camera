@@ -1,4 +1,4 @@
-package cn.techrecycle.android.camerax;
+package com.wttch.android.camerax;
 
 import android.content.Context;
 import android.util.Size;

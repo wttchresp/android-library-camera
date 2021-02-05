@@ -1,4 +1,4 @@
-package cn.techrecycle.android.camera
+package com.wttch.android.camera
 
 import org.junit.Test
 

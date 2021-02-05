@@ -1,4 +1,4 @@
-package cn.techrecycle.android.camerax;
+package com.wttch.android.camerax;
 
 import androidx.camera.core.Camera;
 import androidx.camera.core.ImageProxy;

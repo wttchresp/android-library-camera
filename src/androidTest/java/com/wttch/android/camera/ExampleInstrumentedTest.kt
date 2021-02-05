@@ -1,4 +1,4 @@
-package cn.techrecycle.android.camera
+package com.wttch.android.camera
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
